@@ -36,5 +36,7 @@ defmodule Tweet.Endpoint do
     key: "_tweet_key",
     signing_salt: "lOsUYCuR"
 
+  plug CORSPlug
+  
   plug Tweet.Router
 end
