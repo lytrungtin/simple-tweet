@@ -54,5 +54,5 @@ Copy `.env.example` contents into to a new `.env` file
 Start the dev server
 
 ```
-npm start
+yarn start
 ```
