@@ -1,0 +1,49 @@
+defmodule Tweet.TweetController do
+  use Tweet.Web, :controller
+
+  alias Tweet.Tweet
+
+  @tweet_params %{"action" => "tweet"}
+
+  def index(conn, _params) do
+    render(conn, "index.json", tweets: fetch_tweets())
+  end
+
+  def create(conn, params) do
+    params = Map.merge(@tweet_params, params)
+    changeset = Tweet.changeset(%Tweet{}, params)
+
+    case Repo.insert(changeset) do
+      {:ok, _tweet} ->
+        render(conn, "index.json", tweets: fetch_tweets())
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(Tweet.ChangesetView, "error.json", changeset: changeset)
+    end
+  end
+
+  def retweet(conn, %{"id" => tweet_id}) do
+    target_tweet = Repo.get(Tweet, tweet_id)
+    changeset = Tweet.changeset(
+      %Tweet{},
+      %{target_id: target_tweet.id, action: "retweet"}
+    )
+
+    case Repo.insert(changeset) do
+      {:ok, _tweet} ->
+        render(conn, "index.json", tweets: fetch_tweets())
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(Tweet.ChangesetView, "error.json", changeset: changeset)
+    end
+  end
+
+  defp fetch_tweets() do
+    q = from t in Tweet,
+    join: rt in Tweet, where: (rt.target_id == t.id or is_nil(rt.target_id)) and t.action == ^"tweet",
+    group_by: t.id, order_by: [desc: count(rt.target_id)]
+    Repo.all(q, limit: 10)
+  end
+end

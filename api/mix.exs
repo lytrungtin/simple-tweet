@@ -1,11 +1,13 @@
 defmodule Tweet.Mixfile do
   use Mix.Project
 
+  @elixir_version "~> 1.6"
+
   def project do
     [
       app: :tweet,
       version: "0.0.1",
-      elixir: "~> 1.4",
+      elixir: @elixir_version,
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
@@ -39,7 +41,10 @@ defmodule Tweet.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:plug_cowboy, "~> 1.0"}
+      {:plug_cowboy, "~> 1.0"},
+      {:comeonin, "~> 2.5"},
+      {:guardian, "~> 1.2.0"},
+      {:cors_plug, "~> 1.1"}
     ]
   end
 
