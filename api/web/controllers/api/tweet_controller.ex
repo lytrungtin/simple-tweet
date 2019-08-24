@@ -14,7 +14,7 @@ defmodule Tweet.TweetController do
     changeset = Tweet.changeset(%Tweet{}, params)
 
     case Repo.insert(changeset) do
-      {:ok, _tweet} ->
+      {:ok, tweet} ->
         render(conn, "index.json", tweets: fetch_tweets())
       {:error, changeset} ->
         conn
@@ -31,7 +31,7 @@ defmodule Tweet.TweetController do
     )
 
     case Repo.insert(changeset) do
-      {:ok, _tweet} ->
+      {:ok, tweet} ->
         render(conn, "index.json", tweets: fetch_tweets())
       {:error, changeset} ->
         conn

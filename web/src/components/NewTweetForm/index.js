@@ -1,11 +1,13 @@
 // @flow
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import Errors from '../Errors';
 
 type Props = {
   handleSubmit: () => void,
   onSubmit: () => void,
   submitting: boolean,
+  errors: any,
 }
 
 class NewTweetForm extends Component {
@@ -14,7 +16,7 @@ class NewTweetForm extends Component {
   handleSubmit = data => this.props.onSubmit(data);
 
   render() {
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit, submitting, errors } = this.props;
 
     return (
       <form onSubmit={handleSubmit(this.handleSubmit)} className="form-inline">
@@ -27,13 +29,15 @@ class NewTweetForm extends Component {
                 placeholder="Message"
                 component="input"
                 className="form-control"
-                required
                 style={{ width: '100%' }}
-              />  
-              <button type="submit" className="btn btn-default" disabled={submitting}>
-                {submitting ? 'Tweeting...' : 'Tweet'}
-              </button>
+              />
+              <div className="input-group-btn">
+                  <button type="submit" className="btn btn-primary" disabled={submitting}>
+                    {submitting ? 'Tweeting...' : 'Tweet'}
+                  </button>
+              </div>
             </div>
+            <Errors name="message" errors={errors} />
           </div>
         </div>
       </form>

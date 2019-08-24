@@ -1,4 +1,4 @@
-defmodule Tweet.ChangesetView do
+defmodule ChangesetView do
   use Tweet.Web, :view
 
   @doc """

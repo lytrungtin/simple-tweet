@@ -15,16 +15,12 @@ const styles = StyleSheet.create({
   },
 });
 
-type Tweet = {
-  id: number,
-  name: string,
-}
-
 type Props = {
   tweets: Array<Tweet>,
   fetchTweets: () => void,
   createTweet: () => void,
   reTweet: () => void,
+  newTweetErrors: Array<string>,
 }
 
 class Home extends Component {
@@ -38,9 +34,9 @@ class Home extends Component {
 
   props: Props
 
-  handleNewTweetSubmit = data => this.props.createTweet(data);
+  handleNewTweetSubmit = (data) => this.props.createTweet(data, this.context.router);
 
-  handleReTweet = tweetId => this.props.reTweet(tweetId);
+  handleReTweet = (tweetId) => this.props.reTweet(tweetId, this.context.router);
 
   renderTweets() {
     return this.props.tweets.map(tweet =>
@@ -58,12 +54,12 @@ class Home extends Component {
         <Navbar />
         <div className={`card ${css(styles.card)}`}>
           <h3 style={{ marginBottom: '2rem', textAlign: 'center' }}>Add a new tweet</h3>
-          <NewTweetForm onSubmit={this.handleNewTweetSubmit} />
+          <NewTweetForm onSubmit={this.handleNewTweetSubmit} errors={this.props.newTweetErrors} />
         </div>
         <div className={`card ${css(styles.card)}`}>
-          <h3 style={{ marginBottom: '2rem', textAlign: 'center' }}>Top 10 tweets order by number of retweets</h3>
+          <h3 style={{ marginBottom: '2rem', textAlign: 'center' }}>Top 10 tweets arrange order by number of retweets</h3>
           <div className="table-responsive">
-            <table class="table"  style={{ width: '100%', textAlign: 'center' }}>
+            <table className="table"  style={{ width: '100%', textAlign: 'center' }}>
               <thead>
                 <tr>
                   <th scope="col">Tweet ID</th>
@@ -86,6 +82,7 @@ class Home extends Component {
 export default connect(
   state => ({
     tweets: state.tweets.all,
+    newTweetErrors: state.tweets.newTweetErrors,
   }),
   { fetchTweets, createTweet, reTweet }
 )(Home);
