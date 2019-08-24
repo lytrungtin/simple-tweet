@@ -11,5 +11,6 @@ defmodule Tweet.Repo.Migrations.CreateTweet do
     end
 
     create index(:tweets, [:target_id])
+    create unique_index(:tweets, [:message])
   end
 end

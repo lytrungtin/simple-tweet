@@ -3,7 +3,6 @@ defmodule Tweet.ChangesetView do
 
   @doc """
   Traverses and translates changeset errors.
-
   See `Ecto.Changeset.traverse_errors/2` and
   `Tweet.ErrorHelpers.translate_error/1` for more details.
   """

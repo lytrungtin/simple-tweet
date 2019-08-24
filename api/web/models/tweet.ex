@@ -17,5 +17,6 @@ defmodule Tweet.Tweet do
     struct
     |> cast(params, [:action, :message, :target_id])
     |> validate_required([:action])
+    |> unique_constraint(:message)
   end
 end

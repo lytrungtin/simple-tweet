@@ -19,7 +19,7 @@ defmodule Tweet.TweetController do
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(Tweet.ChangesetView, "error.json", changeset: changeset)
+        |> render(ChangesetView, "error.json", changeset: changeset)
     end
   end
 
@@ -36,7 +36,7 @@ defmodule Tweet.TweetController do
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(Tweet.ChangesetView, "error.json", changeset: changeset)
+        |> render(ChangesetView, "error.json", changeset: changeset)
     end
   end
 
