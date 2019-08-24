@@ -10,7 +10,7 @@ import TweetListItem from '../../components/TweetListItem';
 
 const styles = StyleSheet.create({
   card: {
-    maxWidth: '500px',
+    maxWidth: '768px',
     margin: '2rem auto',
   },
 });
@@ -43,7 +43,6 @@ class Home extends Component {
   handleReTweet = tweetId => this.props.reTweet(tweetId);
 
   renderTweets() {
-
     return this.props.tweets.map(tweet =>
       <TweetListItem
         key={tweet.id}
@@ -63,7 +62,21 @@ class Home extends Component {
         </div>
         <div className={`card ${css(styles.card)}`}>
           <h3 style={{ marginBottom: '2rem', textAlign: 'center' }}>Top 10 tweets order by number of retweets</h3>
-          {this.renderTweets()}
+          <div className="table-responsive">
+            <table class="table"  style={{ width: '100%', textAlign: 'center' }}>
+              <thead>
+                <tr>
+                  <th scope="col">Tweet ID</th>
+                  <th scope="col">Messages</th>
+                  <th scope="col">Retweets</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+                <tbody>
+                  {this.renderTweets()}
+                </tbody>
+            </table>
+          </div>
         </div>
       </div>
     );

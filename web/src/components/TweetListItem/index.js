@@ -9,17 +9,20 @@ type Props = {
 }
 
 const TweetListItem = ({ tweet, onReTweet }: Props) => {
-
   return (
-    <div key={tweet.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-      <span style={{ marginRight: '8px' }}>{tweet.message}</span>
-      <button
-        onClick={() => onReTweet(tweet.id)}
-        className="btn btn-sm"
-      >
-        Retweet
-      </button>
-    </div>
+    <tr key={tweet.id}>
+      <td>{tweet.id}</td>
+      <td>{tweet.message}</td>
+      <td>{tweet.num_retweets}</td>
+      <td>
+          <button
+            onClick={() => onReTweet(tweet.id)}
+            className="btn btn-sm"
+          >
+            Retweet
+          </button>
+      </td>
+    </tr>
   );
 };
 

@@ -42,8 +42,11 @@ defmodule Tweet.TweetController do
 
   defp fetch_tweets() do
     q = from t in Tweet,
-    join: rt in Tweet, where: (rt.target_id == t.id or is_nil(rt.target_id)) and t.action == ^"tweet",
-    group_by: t.id, order_by: [desc: count(rt.target_id)]
-    Repo.all(q, limit: 10)
+    join: rt in Tweet,
+    where: (rt.target_id == t.id or is_nil(rt.target_id)) and t.action == ^"tweet",
+    group_by: t.id, order_by: [desc: count(rt.target_id)],
+    select: %{num_retweets: count(rt.target_id), message: t.message, id: t.id},
+    limit: 10
+    Repo.all(q)
   end
 end

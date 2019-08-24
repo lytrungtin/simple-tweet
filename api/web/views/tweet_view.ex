@@ -7,8 +7,7 @@ defmodule Tweet.TweetView do
 
   def render("tweet.json", %{tweet: tweet}) do
     %{id: tweet.id,
-      action: tweet.action,
       message: tweet.message,
-      target_id: tweet.target_id}
+      num_retweets: tweet.num_retweets}
   end
 end

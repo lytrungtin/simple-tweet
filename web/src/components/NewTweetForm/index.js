@@ -19,7 +19,7 @@ class NewTweetForm extends Component {
     return (
       <form onSubmit={handleSubmit(this.handleSubmit)} className="form-inline">
         <div className="row">
-          <div className="form-group col-sm-10">
+          <div className="form-group col-sm-12">
             <div className="input-group">
               <Field
                 name="message"
@@ -27,6 +27,8 @@ class NewTweetForm extends Component {
                 placeholder="Message"
                 component="input"
                 className="form-control"
+                required
+                style={{ width: '100%' }}
               />  
               <button type="submit" className="btn btn-default" disabled={submitting}>
                 {submitting ? 'Tweeting...' : 'Tweet'}
