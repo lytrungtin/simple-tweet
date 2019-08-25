@@ -4,7 +4,7 @@ defmodule Tweet.Repo.Migrations.CreateTweet do
   def change do
     create table(:tweets) do
       add :action, :string
-      add :message, :string
+      add :message, :string, size: 140
       add :target_id, references(:tweets)
 
       timestamps()
