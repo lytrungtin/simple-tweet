@@ -19,7 +19,7 @@ defmodule Tweet.TweetController do
 
     case Repo.insert(changeset) do
       {:ok, tweet} ->
-        render(conn, "index.json", tweets: fetch_tweets(0, 10))
+        render(conn, "index.json", tweets: fetch_tweets(0, 1000))
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -36,7 +36,7 @@ defmodule Tweet.TweetController do
 
     case Repo.insert(changeset) do
       {:ok, tweet} ->
-        render(conn, "index.json", tweets: fetch_tweets(0, 10))
+        render(conn, "index.json", tweets: fetch_tweets(0, 1000))
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
