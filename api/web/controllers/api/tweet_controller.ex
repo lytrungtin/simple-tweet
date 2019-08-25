@@ -1,6 +1,6 @@
 defmodule Tweet.TweetController do
   use Tweet.Web, :controller
-
+  require IEx
   alias Tweet.Tweet
 
   @tweet_params %{"action" => "tweet"}
@@ -18,7 +18,7 @@ defmodule Tweet.TweetController do
     changeset = Tweet.changeset(%Tweet{}, params)
 
     case Repo.insert(changeset) do
-      {:ok, tweet} ->
+      {:ok, _tweet} ->
         render(conn, "index.json", tweets: fetch_tweets(0, 1000))
       {:error, changeset} ->
         conn
@@ -35,7 +35,7 @@ defmodule Tweet.TweetController do
     )
 
     case Repo.insert(changeset) do
-      {:ok, tweet} ->
+      {:ok, _tweet} ->
         render(conn, "index.json", tweets: fetch_tweets(0, 1000))
       {:error, changeset} ->
         conn
@@ -45,13 +45,13 @@ defmodule Tweet.TweetController do
   end
 
   defp fetch_tweets(start_from, limit_tweets) do
-    q = from t in Tweet,
-    join: rt in Tweet,
-    where: (rt.target_id == t.id or is_nil(rt.target_id)) and t.action == ^"tweet",
-    group_by: t.id, order_by: [desc: count(rt.target_id)],
-    select: %{num_retweets: count(rt.target_id), message: t.message, id: t.id},
-    limit: ^limit_tweets,
-    offset: ^start_from
-    Repo.all(q)
+    query = from t in Tweet,
+              join: rt in Tweet,
+              where: (rt.target_id == t.id or is_nil(rt.target_id)) and t.action == ^"tweet",
+              group_by: t.id, order_by: [desc: count(rt.target_id)],
+              select: %{num_retweets: count(rt.target_id), message: t.message, id: t.id},
+              limit: ^limit_tweets,
+              offset: ^start_from
+    Repo.all(query)
   end
 end

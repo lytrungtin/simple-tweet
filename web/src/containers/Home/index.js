@@ -51,6 +51,12 @@ class Home extends Component {
     );
   }
 
+  renderLoadMore() {
+    if(this.props.tweets.length === 10)
+      return <button onClick={() => this.handleLoadMore(1000)}>Load all tweets...</button>;
+    return null;
+  }
+
   render() {
     return (
       <div style={{ flex: '1' }}>
@@ -65,7 +71,6 @@ class Home extends Component {
             <table className="table"  style={{ width: '100%', textAlign: 'center' }}>
               <thead>
                 <tr>
-                  <th scope="col">Tweet ID</th>
                   <th scope="col">Messages</th>
                   <th scope="col">Retweets</th>
                   <th scope="col"></th>
@@ -77,7 +82,7 @@ class Home extends Component {
             </table>
           </div>
           <div>
-            <button onClick={() => this.handleLoadMore(1000)}>Load more tweets...</button>
+            {this.renderLoadMore()}
           </div>
         </div>
       </div>
