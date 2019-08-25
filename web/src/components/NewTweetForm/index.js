@@ -25,9 +25,8 @@ class NewTweetForm extends Component {
             <div className="input-group">
               <Field
                 name="message"
-                type="text"
-                placeholder="Message"
-                component="input"
+                placeholder="What's happening?"
+                component="textarea"
                 className="form-control"
                 style={{ width: '100%' }}
               />

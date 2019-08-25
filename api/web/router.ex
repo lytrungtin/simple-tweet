@@ -11,5 +11,6 @@ defmodule Tweet.Router do
     get "/tweets/:id/tweets", TweetController, :tweets
     resources "/tweets", TweetController, only: [:index, :create]
     post "/tweets/:id/retweet", TweetController, :retweet
+    post "/tweets/:num_tweets/load_more", TweetController, :load_more
   end
 end

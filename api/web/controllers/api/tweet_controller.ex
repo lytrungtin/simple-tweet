@@ -6,7 +6,11 @@ defmodule Tweet.TweetController do
   @tweet_params %{"action" => "tweet"}
 
   def index(conn, _params) do
-    render(conn, "index.json", tweets: fetch_tweets())
+    render(conn, "index.json", tweets: fetch_tweets(0, 10))
+  end
+
+  def load_more(conn, %{"num_tweets" => num_tweets}) do
+    render(conn, "index.json", tweets: fetch_tweets(0, num_tweets))
   end
 
   def create(conn, params) do
@@ -15,7 +19,7 @@ defmodule Tweet.TweetController do
 
     case Repo.insert(changeset) do
       {:ok, tweet} ->
-        render(conn, "index.json", tweets: fetch_tweets())
+        render(conn, "index.json", tweets: fetch_tweets(0, 10))
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -32,7 +36,7 @@ defmodule Tweet.TweetController do
 
     case Repo.insert(changeset) do
       {:ok, tweet} ->
-        render(conn, "index.json", tweets: fetch_tweets())
+        render(conn, "index.json", tweets: fetch_tweets(0, 10))
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -40,13 +44,14 @@ defmodule Tweet.TweetController do
     end
   end
 
-  defp fetch_tweets() do
+  defp fetch_tweets(start_from, limit_tweets) do
     q = from t in Tweet,
     join: rt in Tweet,
     where: (rt.target_id == t.id or is_nil(rt.target_id)) and t.action == ^"tweet",
     group_by: t.id, order_by: [desc: count(rt.target_id)],
     select: %{num_retweets: count(rt.target_id), message: t.message, id: t.id},
-    limit: 10
+    limit: ^limit_tweets,
+    offset: ^start_from
     Repo.all(q)
   end
 end

@@ -2,13 +2,26 @@
 
 The goal of this exercise is to Implement a very basic version of Twitter. 
 
+## Points to consider
+
+- [x] User can create a tweet on this page.
+- [x] For the purpose of this exercise, the tweet will contain just 140 characters long string. 
+- [x] Not necessary to implement authentication or any user management. Every tweet is anonymous.
+- [x] Any tweet can be retweeted. 
+- [x] As you land on this page, you should display top 10 tweets. (Ordering is based on the number of retweets the original tweet gets) 
+- [ ] For the purpose of this exercise, the data can be maintained in memory. 
+
 ## Demo
 
 http://simple-tweet.s3-website-ap-southeast-1.amazonaws.com/
 
-## About
+## Stack
 
-This is very basic version of Twitter built with Phoenix and React. 
+Back end:
+- Elixir on Phoenix is deployed on Heroku.
+
+Frontend:
+- React Native is deployed on AWS S3.
 
 ## Getting started
 

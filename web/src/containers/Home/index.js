@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css, StyleSheet } from 'aphrodite';
-import { fetchTweets, createTweet, reTweet } from '../../actions/tweets';
+import { fetchTweets, createTweet, reTweet, loadMore } from '../../actions/tweets';
 import NewTweetForm from '../../components/NewTweetForm';
 import Navbar from '../../components/Navbar';
 import TweetListItem from '../../components/TweetListItem';
@@ -20,6 +20,7 @@ type Props = {
   fetchTweets: () => void,
   createTweet: () => void,
   reTweet: () => void,
+  loadMore: () => void,
   newTweetErrors: Array<string>,
 }
 
@@ -37,6 +38,8 @@ class Home extends Component {
   handleNewTweetSubmit = (data) => this.props.createTweet(data, this.context.router);
 
   handleReTweet = (tweetId) => this.props.reTweet(tweetId, this.context.router);
+
+  handleLoadMore = (numTweets) => this.props.loadMore(numTweets, this.context.router);
 
   renderTweets() {
     return this.props.tweets.map(tweet =>
@@ -73,6 +76,9 @@ class Home extends Component {
                 </tbody>
             </table>
           </div>
+          <div>
+            <button onClick={() => this.handleLoadMore(1000)}>Load more tweets...</button>
+          </div>
         </div>
       </div>
     );
@@ -84,5 +90,5 @@ export default connect(
     tweets: state.tweets.all,
     newTweetErrors: state.tweets.newTweetErrors,
   }),
-  { fetchTweets, createTweet, reTweet }
+  { fetchTweets, createTweet, reTweet, loadMore }
 )(Home);

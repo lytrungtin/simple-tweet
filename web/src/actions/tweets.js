@@ -23,3 +23,11 @@ export function reTweet(tweetId) {
       dispatch({ type: 'FETCH_TWEET_SUCCESS', response });
     });
 }
+
+export function loadMore(numTweets) {
+  return dispatch => api.post(`/tweets/${numTweets}/load_more`)
+    .then((response) => {
+      dispatch({ type: 'LOAD_MORE_SUCCESS', response });
+    });
+}
+

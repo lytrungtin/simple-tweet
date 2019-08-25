@@ -16,6 +16,11 @@ const initialState = {
           ...state,
           newTweetErrors: action.error.errors,
         };
+      case 'LOAD_MORE_SUCCESS':
+        return {
+          ...state,
+          all:  action.response.data,
+        };
       default:
         return state;
     }
