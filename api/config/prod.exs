@@ -2,10 +2,10 @@ use Mix.Config
 
 config :tweet, Tweet.Endpoint,
   http: [:inet6, port: {:system, "PORT"}],
-  url: [scheme: "https", host: "gentle-chamber-83079.herokuapp.com", port: 443],
+  url: [scheme: "https", host: "basic-tweet.herokuapp.com", port: 443],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
-  check_origin: ["http://simple-tweet.s3-website-ap-southeast-1.amazonaws.com"]
+  check_origin: ["http://simple-tweet.lytrungtin.com"]
 
 config :logger, level: :info
 

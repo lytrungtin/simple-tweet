@@ -13,7 +13,7 @@ The goal of this exercise is to Implement a very basic version of Twitter.
 
 ## Demo
 
-http://simple-tweet.s3-website-ap-southeast-1.amazonaws.com/
+http://simple-tweet.lytrungtin.com/
 
 ## Stack
 
@@ -21,7 +21,7 @@ Back end:
 - Elixir on Phoenix is deployed on Heroku.
 
 Frontend:
-- React Native is deployed on AWS S3.
+- React Native is deployed on Digitalocean.
 
 ## Getting started
 

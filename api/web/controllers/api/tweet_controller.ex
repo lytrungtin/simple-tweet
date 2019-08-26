@@ -1,6 +1,6 @@
 defmodule Tweet.TweetController do
   use Tweet.Web, :controller
-  require IEx
+
   alias Tweet.Tweet
 
   @tweet_params %{"action" => "tweet"}
