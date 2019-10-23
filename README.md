@@ -21,7 +21,7 @@ Back end:
 - Elixir on Phoenix is deployed on Heroku.
 
 Frontend:
-- React Native is deployed on Digitalocean.
+- React JS is deployed on Digitalocean.
 
 ## Getting started
 
